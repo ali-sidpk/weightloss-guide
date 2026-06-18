@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuideToWellness | Global Fitness & Weight Loss Hub</title>
+    <meta name="description" content="Your complete guide to weight loss, high-protein meal plans, home workouts, and fitness tracking. Science-backed strategies for a sustainable body transformation.">
+    <meta name="keywords" content="weight loss guide for beginners, how to lose weight fast, best exercises for weight loss, high protein meal plan, calorie deficit diet, HIIT workout for beginners, fitness tracker, best diet for weight loss 2025">
+    <style>
+        /* CSS RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary-color: #1b4332;
+            --secondary-color: #40916c;
+            --accent-color: #52b788;
+            --accent-orange: #f4845f;
+            --bg-light: #f4f7f6;
+            --text-dark: #2d3142;
+            --text-muted: #6c757d;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--secondary-color); }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-left: 20px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--secondary-color); }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 30px;
+            background: linear-gradient(180deg, #d8f3dc 0%, var(--bg-light) 100%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* ============================================
+           FITNESS TRACKER SECTION
+           ============================================ */
+        .tracker-section {
+            max-width: 960px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+        }
+
+        .tracker-section h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+        }
+
+        .tracker-section .tracker-sub {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        .tracker-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .tracker-card {
+            background: white;
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+        }
+
+        .tracker-card h3 {
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tracker-card label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            margin-top: 10px;
+        }
+
+        .tracker-card input, .tracker-card select {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            background: #fafafa;
+            transition: border 0.2s;
+        }
+
+        .tracker-card input:focus, .tracker-card select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: white;
+        }
+
+        .tracker-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .tracker-btn:hover { background: #112a20; }
+
+        .tracker-result {
+            margin-top: 14px;
+            background: #eaf7f1;
+            border-left: 4px solid var(--accent-color);
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            display: none;
+        }
+
+        .tracker-result.show { display: block; }
+
+        /* Progress log */
+        .log-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.88rem;
+            color: var(--text-dark);
+        }
+
+        .log-entry:last-child { border-bottom: none; }
+
+        .log-delete {
+            background: none;
+            border: none;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .log-delete:hover { color: #e74c3c; }
+
+        .log-empty {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            padding: 18px 0;
+        }
+
+        /* Macro ring */
+        .macro-ring-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .macro-pill {
+            text-align: center;
+            background: #f4f7f6;
+            border-radius: 10px;
+            padding: 12px 18px;
+            min-width: 80px;
+        }
+
+        .macro-pill .mp-val {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .macro-pill .mp-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .macro-bar-wrap { margin-top: 10px; }
+
+        .macro-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .macro-bar-row span:first-child { width: 70px; }
+
+        .macro-bar-outer {
+            flex: 1;
+            background: #eee;
+            border-radius: 4px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .macro-bar-inner {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* PILLAR & CLUSTER VISUAL GRID */
+        .seo-dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1.3fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .cluster-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .cluster-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border-left: 5px solid var(--accent-color);
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .cluster-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-left-color: var(--primary-color);
+        }
+
+        .cluster-card h3 {
+            font-size: 1.05rem;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .cluster-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .keyword-badge {
+            display: inline-block;
+            background: #e9f5ed;
+            color: var(--secondary-color);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .main-pillar-card {
+            background: #d8f3dc;
+            border: 3px dashed var(--primary-color);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(40,116,101,0.12);
+        }
+
+        .pillar-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .main-pillar-card h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .main-pillar-card p {
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+        }
+
+        .btn-main {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-main:hover { background: #112a20; }
+
+        /* ARTICLE IMAGES */
+        .article-img {
+            width: 100%;
+            max-height: 320px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 18px 0;
+        }
+
+        .img-caption {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: -10px;
+            margin-bottom: 18px;
+        }
+
+        /* LIVE ARTICLES SECTION */
+        .articles-section {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-divider {
+            text-align: center;
+            margin: 50px 0;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 35%;
+            height: 1px;
+            background: #ccc;
+        }
+
+        .section-divider::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 35%;
+            height: 1px;
+            background: #ccc;
+        }
+
+        article {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            margin-bottom: 5px;
+            scroll-margin-top: 100px;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        .article-pillar {
+            background: #eaf7f1;
+            border-left: 6px solid var(--primary-color);
+        }
+
+        article h1.entry-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        article h2 {
+            font-size: 1.45rem;
+            color: var(--primary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        article h3 {
+            font-size: 1.15rem;
+            color: var(--secondary-color);
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        article p {
+            margin-bottom: 18px;
+            color: #4a4a4a;
+            font-size: 1.02rem;
+        }
+
+        article ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        article li {
+            margin-bottom: 8px;
+            color: #4a4a4a;
+        }
+
+        .cta-box {
+            background: #f0f9f4;
+            border: 1px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .cta-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .back-to-top {
+            display: inline-block;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-to-top:hover { text-decoration: underline; }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .seo-dashboard { grid-template-columns: 1fr; }
+            .main-pillar-card { order: -1; }
+            .tracker-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            article { padding: 24px 18px; }
+            article h1.entry-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">GuideTo<span>Wellness</span></a>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#fitness-tracker">Tracker</a>
+                <a href="#pillar">Main Guide</a>
+                <a href="#cluster-1">Nutrition</a>
+                <a href="#cluster-4">Workouts</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO HEADER -->
+    <section class="hero">
+        <h1>Global Fitness & Weight Loss Hub</h1>
+        <p>Science-backed strategies for sustainable fat loss, high-protein nutrition, and effective home workouts — trusted worldwide.</p>
+    </section>
+
+    <!-- ============================================
+         FITNESS TRACKER SECTION
+         ============================================ -->
+    <section id="fitness-tracker" class="tracker-section">
+        <h2>🏋️ Personal Fitness Tracker</h2>
+        <p class="tracker-sub">Track your calories, macros, and daily workouts — all in one place.</p>
+
+        <div class="tracker-grid">
+
+            <!-- CALORIE & TDEE CALCULATOR -->
+            <div class="tracker-card">
+                <h3>⚡ TDEE & Calorie Calculator</h3>
+
+                <label>Age</label>
+                <input type="number" id="t-age" placeholder="e.g. 28" min="10" max="100">
+
+                <label>Gender</label>
+                <select id="t-gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <label>Weight (kg)</label>
+                <input type="number" id="t-weight" placeholder="e.g. 75" min="30" max="300">
+
+                <label>Height (cm)</label>
+                <input type="number" id="t-height" placeholder="e.g. 175" min="100" max="250">
+
+                <label>Activity Level</label>
+                <select id="t-activity">
+                    <option value="1.2">Sedentary (desk job, little exercise)</option>
+                    <option value="1.375">Lightly Active (1–3 days/week)</option>
+                    <option value="1.55">Moderately Active (3–5 days/week)</option>
+                    <option value="1.725">Very Active (6–7 days/week)</option>
+                    <option value="1.9">Athlete (2x/day training)</option>
+                </select>
+
+                <label>Goal</label>
+                <select id="t-goal">
+                    <option value="-500">Fat Loss (−500 kcal deficit)</option>
+                    <option value="0">Maintain Weight</option>
+                    <option value="300">Lean Bulk (+300 kcal surplus)</option>
+                </select>
+
+                <button class="tracker-btn" onclick="calcTDEE()">Calculate My Calories</button>
+
+                <div class="tracker-result" id="tdee-result"></div>
+
+                <div id="macro-display" style="display:none; margin-top:14px;">
+                    <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:8px;">Recommended Daily Macros</div>
+                    <div class="macro-ring-wrap">
+                        <div class="macro-pill"><div class="mp-val" id="mp-protein">—</div><div class="mp-label">Protein (g)</div></div>
+                        <div class="macro-pill"><div class="mp-val" id="mp-carbs">—</div><div class="mp-label">Carbs (g)</div></div>
+                        <div class="macro-pill"><div class="mp-val" id="mp-fat">—</div><div class="mp-label">Fat (g)</div></div>
+                    </div>
+                    <div class="macro-bar-wrap" style="margin-top:12px;">
+                        <div class="macro-bar-row"><span>Protein</span><div class="macro-bar-outer"><div class="macro-bar-inner" id="bar-protein" style="background:#40916c;width:0%"></div></div></div>
+                        <div class="macro-bar-row"><span>Carbs</span><div class="macro-bar-outer"><div class="macro-bar-inner" id="bar-carbs" style="background:#52b788;width:0%"></div></div></div>
+                        <div class="macro-bar-row"><span>Fat</span><div class="macro-bar-outer"><div class="macro-bar-inner" id="bar-fat" style="background:#f4845f;width:0%"></div></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAILY LOG -->
+            <div class="tracker-card">
+                <h3>📋 Daily Activity & Food Log</h3>
+
+                <label>Log Type</label>
+                <select id="log-type">
+                    <option value="meal">🥗 Meal</option>
+                    <option value="workout">💪 Workout</option>
+                    <option value="water">💧 Water Intake</option>
+                    <option value="steps">👟 Step Count</option>
+                    <option value="weight">⚖️ Body Weight</option>
+                </select>
+
+                <label>Description</label>
+                <input type="text" id="log-desc" placeholder="e.g. Grilled chicken breast, 200g">
+
+                <label>Value (calories / reps / glasses / steps / kg)</label>
+                <input type="number" id="log-value" placeholder="e.g. 320">
+
+                <button class="tracker-btn" onclick="addLog()">+ Add to Today's Log</button>
+
+                <div style="margin-top:18px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                        <span style="font-size:0.85rem;font-weight:600;color:var(--primary-color);">Today's Log</span>
+                        <span style="font-size:0.78rem;color:var(--text-muted);" id="log-date"></span>
+                    </div>
+                    <div id="log-list"><div class="log-empty">No entries yet. Start logging above!</div></div>
+                    <div id="log-summary" style="display:none;background:#eaf7f1;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:0.85rem;color:var(--primary-color);font-weight:600;"></div>
+                </div>
+            </div>
+
+            <!-- BMI CALCULATOR -->
+            <div class="tracker-card">
+                <h3>📏 BMI Calculator</h3>
+
+                <label>Weight (kg)</label>
+                <input type="number" id="bmi-weight" placeholder="e.g. 75">
+
+                <label>Height (cm)</label>
+                <input type="number" id="bmi-height" placeholder="e.g. 175">
+
+                <button class="tracker-btn" onclick="calcBMI()">Calculate BMI</button>
+
+                <div class="tracker-result" id="bmi-result"></div>
+
+                <div style="margin-top:14px;background:#f9f9f9;border-radius:10px;padding:12px;font-size:0.8rem;color:var(--text-muted);">
+                    <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span>Underweight</span><span>&lt; 18.5</span></div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span>Normal</span><span>18.5 – 24.9</span></div>
+                    <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span>Overweight</span><span>25 – 29.9</span></div>
+                    <div style="display:flex;justify-content:space-between;"><span>Obese</span><span>≥ 30</span></div>
+                </div>
+            </div>
+
+            <!-- WORKOUT TIMER -->
+            <div class="tracker-card">
+                <h3>⏱️ Workout Interval Timer</h3>
+
+                <label>Work Duration (seconds)</label>
+                <input type="number" id="timer-work" value="40" min="5" max="300">
+
+                <label>Rest Duration (seconds)</label>
+                <input type="number" id="timer-rest" value="20" min="5" max="300">
+
+                <label>Number of Rounds</label>
+                <input type="number" id="timer-rounds" value="8" min="1" max="50">
+
+                <div style="text-align:center;margin:18px 0 6px;">
+                    <div id="timer-display" style="font-size:3rem;font-weight:800;color:var(--primary-color);letter-spacing:2px;">00:40</div>
+                    <div id="timer-phase" style="font-size:0.9rem;color:var(--text-muted);margin-top:4px;">Press Start to begin</div>
+                    <div id="timer-round-display" style="font-size:0.85rem;color:var(--secondary-color);margin-top:2px;"></div>
+                </div>
+
+                <div style="display:flex;gap:10px;">
+                    <button class="tracker-btn" style="background:var(--secondary-color);" onclick="startTimer()">▶ Start</button>
+                    <button class="tracker-btn" style="background:#888;width:auto;flex:0 0 auto;padding:11px 18px;" onclick="resetTimer()">↺ Reset</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INTERACTIVE MAP / GRID -->
+    <div class="seo-dashboard">
+        <div class="cluster-column">
+            <a href="#cluster-1" class="cluster-card">
+                <h3>1. High Protein Meal Plan For Weight Loss</h3>
+                <p>Science-backed nutrition strategy using lean proteins, complex carbs, and healthy fats.</p>
+            </a>
+            <a href="#cluster-2" class="cluster-card">
+                <h3>2. Best Foods For Weight Loss & Metabolism</h3>
+                <p>Nutrient-dense whole foods proven to accelerate fat burning and reduce hunger.</p>
+            </a>
+            <a href="#cluster-3" class="cluster-card">
+                <h3>3. Best Drinks For Weight Loss</h3>
+                <p>Evidence-based beverages that support fat oxidation and metabolic recovery overnight.</p>
+            </a>
+        </div>
+
+        <div id="pillar-map" class="main-pillar-card">
+            <span class="pillar-tag">Pillar Hub</span>
+            <h2>Complete Weight Loss Guide For Beginners</h2>
+            <p>Our authoritative cornerstone guide. Covers calorie deficits, macro tracking, HIIT, and lifestyle habits — with internal links to all 6 specialized cluster topics.</p>
+            <a href="#pillar" class="btn-main">Read Full Guide</a>
+        </div>
+
+        <div class="cluster-column">
+            <a href="#cluster-4" class="cluster-card">
+                <h3>4. Best Home Workouts For Fat Loss (No Equipment)</h3>
+                <p>HIIT and bodyweight circuits proven to burn calories and build lean muscle at home.</p>
+            </a>
+            <a href="#cluster-5" class="cluster-card">
+                <h3>5. Benefits Of Morning Cardio For Weight Loss</h3>
+                <p>How fasted morning movement boosts fat burning and daily energy levels.</p>
+            </a>
+            <a href="#cluster-6" class="cluster-card">
+                <h3>6. Best Fitness Tracker Apps 2025</h3>
+                <p>Top-rated calorie counting and workout tracking apps reviewed for accuracy.</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- LIVE ARTICLES SECTION -->
+    <div class="articles-section">
+
+        <div class="section-divider">COMPLETE GUIDE ARTICLES</div>
+
+        <!-- PILLAR ARTICLE -->
+        <article id="pillar" class="article-pillar">
+            <h1 class="entry-title">The Definitive Weight Loss Guide For Beginners: Build A Sustainable Body Transformation</h1>
+
+            <p><strong>Introduction:</strong> Losing weight doesn't have to be complicated. With the right understanding of calories, macronutrients, and consistent habits, you can achieve sustainable fat loss without crash diets or extreme exercise. This comprehensive <em>weight loss guide for beginners</em> breaks down the science into an actionable, worldwide-applicable roadmap.</p>
+
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80" alt="Fitness transformation — person working out" class="article-img">
+            <p class="img-caption">Sustainable fat loss starts with understanding your body's energy needs.</p>
+
+            <h2>Understanding The Calorie Deficit</h2>
+            <p>Fat loss is governed by one fundamental principle: you must burn more calories than you consume. Creating a moderate deficit of 400–600 calories per day results in approximately 0.5–0.7 kg of fat loss per week — fast enough to see results, slow enough to preserve muscle mass.</p>
+
+            <h2>The Three Pillars of Body Transformation</h2>
+            <p>A lasting physique change requires balancing three interconnected areas. Neglecting any one of them will stall your progress.</p>
+
+            <h3>1. Nutrition Strategy</h3>
+            <p>Food quality and quantity both matter. A diet built around lean proteins, fiber-rich vegetables, and complex carbohydrates keeps you full while maintaining your deficit. Explore our detailed <a href="#cluster-1">high protein meal plan for weight loss</a> and discover the <a href="#cluster-2">best foods for weight loss and metabolism</a>.</p>
+
+            <h3>2. Exercise & Movement</h3>
+            <p>Resistance training preserves muscle while cardio accelerates fat burning. Even with no equipment, structured <a href="#cluster-4">home workouts for fat loss</a> and the consistent habit of <a href="#cluster-5">morning cardio</a> can produce remarkable results.</p>
+
+            <h3>3. Tracking & Recovery</h3>
+            <p>What you measure, you can improve. Use the <a href="#cluster-6">best fitness tracker apps</a> to monitor your intake and activity, and optimize nighttime recovery with the <a href="#cluster-3">best drinks for weight loss</a> before sleep.</p>
+
+            <h2>Conclusion</h2>
+            <p>A true body transformation is built over months, not weeks. Stay in a consistent deficit, prioritize protein, move daily, and track your progress. Use the <a href="#fitness-tracker">Fitness Tracker above</a> to calculate your personal calorie target right now.</p>
+
+            <div class="cta-box">
+                <h4>🚀 Start Your Transformation Today</h4>
+                <p>Use our free Fitness Tracker above to calculate your TDEE, set your calorie target, and log your first workout. Your body transformation begins with one tracked day.</p>
+            </div>
+            <a href="#pillar-map" class="back-to-top">↑ Back to Topic Map</a>
+        </article>
+
+        <div class="section-divider">CLUSTER ARTICLES</div>
+
+        <!-- CLUSTER 1: NUTRITION -->
+        <article id="cluster-1">
+            <h1 class="entry-title">High Protein Meal Plan For Weight Loss: The Science-Backed Guide</h1>
+            <p><strong>Introduction:</strong> Protein is the most important macronutrient for fat loss. It preserves lean muscle, keeps hunger suppressed, and has the highest thermic effect of any food — meaning your body burns more calories simply digesting it. A well-structured <em>high protein meal plan for weight loss</em> is the most effective dietary approach available.</p>
+
+            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=80" alt="High protein meal prep containers" class="article-img">
+            <p class="img-caption">Meal prepping high-protein foods in advance makes sticking to your plan effortless.</p>
+
+            <h2>How Much Protein Do You Actually Need?</h2>
+            <p>Research consistently shows that 1.6–2.2 grams of protein per kilogram of bodyweight is optimal for people in a caloric deficit. For a 75 kg person, that's 120–165 grams of protein per day. Use the <a href="#fitness-tracker">Macro Calculator above</a> to find your exact target.</p>
+
+            <h2>The Best High-Protein Foods For Fat Loss</h2>
+            <ul>
+                <li><strong>Chicken Breast (skinless):</strong> 31g protein per 100g, very low in fat — the gold standard of lean protein.</li>
+                <li><strong>Canned Tuna:</strong> 25g protein per 100g, extremely cheap, ready to eat, zero prep time.</li>
+                <li><strong>Eggs & Egg Whites:</strong> Complete amino acid profile; versatile for any meal of the day.</li>
+                <li><strong>Greek Yogurt (0% fat):</strong> 17g protein per 100g; doubles as a probiotic source for gut health.</li>
+                <li><strong>Cottage Cheese:</strong> Slow-digesting casein protein — perfect before bed to support overnight muscle repair.</li>
+                <li><strong>Lentils & Chickpeas:</strong> Plant-based protein with high fiber to fuel satiety and gut microbiome health.</li>
+                <li><strong>Whey Protein Powder:</strong> Convenient post-workout protein hit; fast-absorbing to kickstart muscle protein synthesis.</li>
+            </ul>
+
+            <h2>Sample High-Protein Full Day Meal Plan</h2>
+            <h3>Breakfast (~450 kcal | ~45g protein)</h3>
+            <p>3 scrambled eggs with spinach and bell peppers cooked in 1 tsp olive oil, plus 1 cup Greek yogurt topped with mixed berries.</p>
+            <h3>Lunch (~500 kcal | ~50g protein)</h3>
+            <p>200g grilled chicken breast over a bed of mixed greens, cherry tomatoes, cucumber, and quinoa, dressed with lemon and olive oil.</p>
+            <h3>Snack (~200 kcal | ~25g protein)</h3>
+            <p>1 serving whey protein shake with almond milk, plus a handful of almonds.</p>
+            <h3>Dinner (~520 kcal | ~45g protein)</h3>
+            <p>Baked salmon fillet with steamed broccoli and sweet potato. Rich in omega-3 fatty acids to reduce inflammation and support fat metabolism.</p>
+
+            <h2>Conclusion</h2>
+            <p>Building your diet around high-protein foods eliminates hunger-driven overeating and protects muscle mass during a deficit. Pair this nutrition strategy with the <a href="#cluster-4">home workouts</a> in our next guide for accelerated results.</p>
+
+            <div class="cta-box">
+                <h4>📊 Calculate Your Protein Target</h4>
+                <p>Use the free Macro Calculator in our <a href="#fitness-tracker">Fitness Tracker section</a> to get your personalized daily protein, carb, and fat targets based on your weight and goal.</p>
+            </div>
+            <a href="#pillar-map" class="back-to-top">↑ Back to Topic Map</a>
+        </article>
+
+        <!-- CLUSTER 2: BEST FOODS -->
+        <article id="cluster-2">
+            <h1 class="entry-title">Best Foods For Weight Loss & Metabolism: A Complete Worldwide Guide</h1>
+            <p><strong>Introduction:</strong> Not all calories are created equal. The <em>best foods for weight loss</em> are those that keep you full, support hormonal balance, and enhance your metabolic rate — making fat loss feel effortless rather than a constant struggle against hunger.</p>
+
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900&q=80" alt="Colorful whole foods for weight loss and health" class="article-img">
+            <p class="img-caption">Whole, minimally processed foods are the cornerstone of any successful fat loss diet.</p>
+
+            <h2>Top Fat-Burning Foods Backed by Science</h2>
+            <ul>
+                <li><strong>Avocado:</strong> Rich in monounsaturated fats and fiber. Increases satiety hormones and slows glucose absorption.</li>
+                <li><strong>Berries (blueberries, raspberries, strawberries):</strong> High in antioxidants and fiber with low caloric density — ideal for curbing sweet cravings.</li>
+                <li><strong>Leafy Greens (spinach, kale, arugula):</strong> Extremely low in calories, high in micronutrients. Fill your plate with these to stay satisfied.</li>
+                <li><strong>Oats:</strong> Beta-glucan fiber in oats slows digestion and feeds beneficial gut bacteria, keeping insulin levels stable.</li>
+                <li><strong>Chili Peppers:</strong> Capsaicin temporarily boosts metabolic rate by 4–5% and reduces appetite.</li>
+                <li><strong>Green Tea:</strong> EGCG catechins combined with caffeine synergistically increase fat oxidation by up to 17%.</li>
+                <li><strong>Salmon & Fatty Fish:</strong> Omega-3s reduce cortisol (stress hormone) levels, directly reducing visceral fat accumulation.</li>
+            </ul>
+
+            <h2>Foods to Strictly Avoid</h2>
+            <p>Ultra-processed foods, sugary beverages, refined white bread, and trans fats not only add empty calories but also disrupt leptin and ghrelin — the hormones controlling hunger. Eliminating these alone often produces 300–500 calorie daily reductions effortlessly.</p>
+
+            <h2>Conclusion</h2>
+            <p>Prioritizing whole, minimally processed foods transforms your relationship with eating. Combine these choices with the <a href="#cluster-1">high protein meal plan</a> and a structured deficit calculated in our <a href="#fitness-tracker">Fitness Tracker</a> for maximum impact.</p>
+
+            <div class="cta-box">
+                <h4>🍎 Build Your Grocery List</h4>
+                <p>Rotate through the foods listed above each week. Variety ensures you hit all your micronutrient targets while keeping meals interesting and sustainable long-term.</p>
+            </div>
+            <a href="#pillar-map" class="back-to-top">↑ Back to Topic Map</a>
+        </article>
+
+        <!-- CLUSTER 3: DRINKS -->
+        <article id="cluster-3">
+            <h1 class="entry-title">Best Drinks For Weight Loss: What to Drink Morning, Day & Night</h1>
+            <p><strong>Introduction:</strong> What you drink can meaningfully impact your metabolic rate, hunger levels, and overnight fat oxidation. The <em>best drinks for weight loss</em> hydrate, reduce inflammation, and support your body's natural fat-burning mechanisms without adding calories.</p>
+
+            <h2>Top Science-Backed Drinks For Fat Loss</h2>
+            <ul>
+                <li><strong>Water (cold):</strong> Drinking 500ml of cold water temporarily boosts metabolism by 24–30% for 60–90 minutes. Aim for 3–4 liters daily.</li>
+                <li><strong>Green Tea:</strong> 3–4 cups daily. EGCG and caffeine combination boosts fat oxidation during both rest and exercise.</li>
+                <li><strong>Black Coffee (unsweetened):</strong> Caffeine mobilizes fatty acids from fat tissue and enhances workout performance by 10–15%.</li>
+                <li><strong>Apple Cider Vinegar Water:</strong> 1–2 tbsp in 250ml water before meals reduces post-meal blood sugar spikes and suppresses appetite.</li>
+                <li><strong>Warm Chamomile Tea (before bed):</strong> Lowers cortisol, improves deep sleep quality, and reduces stress-driven late-night eating.</li>
+                <li><strong>Protein Shake:</strong> A casein protein shake before sleep prevents overnight muscle breakdown and increases morning satiety.</li>
+            </ul>
+
+            <h2>What to Drink at Each Time of Day</h2>
+            <h3>Morning</h3>
+            <p>Start with 500ml of water to break overnight dehydration. Follow with black coffee or green tea 30 minutes before your workout to maximize fat oxidation.</p>
+            <h3>Afternoon</h3>
+            <p>Maintain hydration with plain water or sparkling water. Avoid fruit juices and energy drinks — these are high-sugar calorie bombs that derail fat loss.</p>
+            <h3>Evening</h3>
+            <p>Wind down with chamomile or passionflower tea. If you strength train, a casein shake before bed supports overnight muscle protein synthesis.</p>
+
+            <h2>Conclusion</h2>
+            <p>Strategic beverage choices can add up to a meaningful metabolic advantage over time. Combine smart drinking with the <a href="#pillar">core weight loss principles</a> and daily tracking in our <a href="#fitness-tracker">Fitness Tracker</a>.</p>
+
+            <div class="cta-box">
+                <h4>💧 Log Your Water Today</h4>
+                <p>Use the Daily Log in our <a href="#fitness-tracker">Fitness Tracker</a> to track your water intake. Most people are chronically dehydrated, which is often mistaken for hunger.</p>
+            </div>
+            <a href="#pillar-map" class="back-to-top">↑ Back to Topic Map</a>
+        </article>
+
+        <!-- CLUSTER 4: HOME WORKOUTS -->
+        <article id="cluster-4">
+            <h1 class="entry-title">Best Home Workouts For Fat Loss (No Equipment HIIT Guide)</h1>
+            <p><strong>Introduction:</strong> You don't need a gym, equipment, or a personal trainer to lose body fat. Research shows that <em>high-intensity interval training (HIIT) at home</em> burns as much fat as steady-state cardio in half the time — and continues burning calories for up to 24 hours after the session ends.</p>
+
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=900&q=80" alt="Home bodyweight workout exercises" class="article-img">
+            <p class="img-caption">Bodyweight HIIT training delivers gym-level results from the comfort of your living room.</p>
+
+            <h2>The Science of HIIT for Fat Loss</h2>
+            <p>HIIT works by pushing your heart rate to 80–95% of its maximum for short bursts, followed by brief recovery periods. This creates a powerful metabolic disturbance — scientifically called EPOC (Excess Post-Exercise Oxygen Consumption) — that elevates calorie burning long after the workout ends.</p>
+
+            <h2>The Ultimate Beginner HIIT Circuit (30 Minutes)</h2>
+            <p>Use the <a href="#fitness-tracker">Interval Timer</a> in our Fitness Tracker above. Set 40 seconds work / 20 seconds rest, 8 rounds per exercise.</p>
+            <ul>
+                <li><strong>Jump Squats:</strong> Builds explosive leg power and elevates heart rate rapidly. Modify to regular squats if needed.</li>
+                <li><strong>Push-Ups (incline for beginners):</strong> Trains chest, shoulders, and triceps. Use a wall or elevated surface to reduce difficulty.</li>
+                <li><strong>Mountain Climbers:</strong> Combines core activation with cardiovascular conditioning. Keep hips level throughout.</li>
+                <li><strong>Reverse Lunges:</strong> Unilateral leg training that targets glutes and hamstrings while challenging balance.</li>
+                <li><strong>Burpees (half for beginners):</strong> Full-body compound movement. The single most calorie-dense bodyweight exercise per minute.</li>
+                <li><strong>Plank Hold:</strong> Isometric core exercise that builds the stabilizing muscles protecting your lower back during all other movements.</li>
+            </ul>
+
+            <h2>Weekly Workout Schedule</h2>
+            <p>For optimal fat loss results, follow this structure: HIIT on Monday, Wednesday, Friday. Active recovery (walking, stretching) on Tuesday and Thursday. Rest fully on weekends. This prevents overtraining while keeping your metabolism consistently elevated.</p>
+
+            <h2>Conclusion</h2>
+            <p>Consistency beats intensity. Three 30-minute HIIT sessions per week, combined with the <a href="#cluster-1">high-protein diet plan</a>, will produce visible results within 4–6 weeks. Track every session using our <a href="#fitness-tracker">Fitness Tracker</a>.</p>
+
+            <div class="cta-box">
+                <h4>⏱️ Time Your Workout Right Now</h4>
+                <p>Open the <a href="#fitness-tracker">Interval Timer</a> in our Fitness Tracker, set 40s work / 20s rest, and start your first HIIT session today. No excuses — your living room is the gym.</p>
+            </div>
+            <a href="#pillar-map" class="back-to-top">↑ Back to Topic Map</a>
+        </article>
+
+        <!-- CLUSTER 5: MORNING CARDIO -->
+        <article id="cluster-5">
+            <h1 class="entry-title">Benefits Of Morning Cardio For Weight Loss: The Complete Fasted Training Guide</h1>
+            <p><strong>Introduction:</strong> Morning exercise, particularly in a fasted or semi-fasted state, provides a unique fat-burning advantage that afternoon workouts simply can't replicate. Understanding the <em>benefits of morning cardio for weight loss</em> reveals why so many elite athletes and fitness coaches recommend starting the day with movement.</p>
+
+            <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=900&q=80" alt="Person doing outdoor morning cardio run" class="article-img">
+            <p class="img-caption">Morning cardio in a fasted state targets stored body fat more effectively than any other training time.</p>
+
+            <h2>Why Fasted Morning Cardio Burns More Fat</h2>
+            <p>After 7–9 hours of sleep, your glycogen (stored carbohydrate) levels are significantly depleted. When you exercise in this state, your body has no choice but to turn to stored fat as its primary fuel source. Studies show fasted cardio can increase fat oxidation by up to 20% compared to fed-state training.</p>
+
+            <h2>The Benefits of Morning Exercise</h2>
+            <ul>
+                <li><strong>Boosts Metabolism All Day:</strong> Morning exercise increases NEAT (Non-Exercise Activity Thermogenesis), making you burn more calories in everything you do throughout the day.</li>
+                <li><strong>Lowers Cortisol:</strong> Natural sunlight exposure during a morning walk or run suppresses the stress hormone cortisol, reducing emotional eating throughout the day.</li>
+                <li><strong>Improves Insulin Sensitivity:</strong> Morning exercise makes your cells more responsive to insulin, reducing fat storage and lowering diabetes risk.</li>
+                <li><strong>Builds Habit Consistency:</strong> Morning exercisers are significantly more consistent than evening exercisers — fewer schedule conflicts arise at 6am.</li>
+                <li><strong>Joint-Friendly Options:</strong> A 30–45 minute brisk walk burns 200–350 calories with zero joint impact — accessible for any fitness level.</li>
+            </ul>
+
+            <h2>Conclusion</h2>
+            <p>Even a 30-minute morning walk, performed consistently 5 days per week, burns over 1,000 extra calories weekly — equivalent to roughly 6 kg of fat lost per year from walking alone. Combine it with the <a href="#cluster-4">HIIT workouts</a> on alternate days for a complete cardio program. Log every session in our <a href="#fitness-tracker">Fitness Tracker</a>.</p>
+
+            <div class="cta-box">
+                <h4>👟 Log Today's Steps</h4>
+                <p>Use the Daily Log in our <a href="#fitness-tracker">Fitness Tracker</a> to record your daily step count. Research shows 8,000–10,000 steps per day is associated with significant reductions in cardiovascular disease risk and body fat percentage.</p>
+            </div>
+            <a href="#pillar-map" class="back-to-top">↑ Back to Topic Map</a>
+        </article>
+
+        <!-- CLUSTER 6: APPS -->
+        <article id="cluster-6">
+            <h1 class="entry-title">Best Fitness Tracker Apps 2025: Top Calorie & Workout Tracking Tools Reviewed</h1>
+            <p><strong>Introduction:</strong> People who track their food intake lose significantly more weight than those who don't. The <em>best fitness tracker apps</em> of 2025 make calorie counting, macro tracking, and workout logging seamless — removing the friction between intention and action.</p>
+
+            <img src="https://images.unsplash.com/photo-1510017803434-a899398421b3?w=900&q=80" alt="Smartwatch fitness tracker and app on phone" class="article-img">
+            <p class="img-caption">Modern fitness apps and wearables make tracking your progress easier than ever before.</p>
+
+            <h2>Top Fitness Tracking Apps (2025)</h2>
+            <ul>
+                <li><strong>MyFitnessPal:</strong> The world's largest food database with 14 million+ items. Best for comprehensive calorie and macro tracking globally.</li>
+                <li><strong>Cronometer:</strong> Superior micronutrient tracking. Ideal for users who want to go beyond macros and optimize vitamins and minerals.</li>
+                <li><strong>Lose It!:</strong> Clean interface with a strong barcode scanner and AI meal recognition. Great for beginners wanting simplicity.</li>
+                <li><strong>Strava:</strong> The gold standard for outdoor cardio tracking — running, cycling, and walking with GPS route mapping.</li>
+                <li><strong>Strong App:</strong> Best-in-class for strength training logging — tracks sets, reps, weight, and provides progressive overload suggestions.</li>
+                <li><strong>Whoop / Garmin Connect:</strong> Wearable-integrated apps for advanced biometric tracking including HRV, sleep quality, and recovery scores.</li>
+            </ul>
+
+            <h2>How to Use Tracking Apps Effectively</h2>
+            <p>Consistency matters more than precision. Studies show that people who log food even 3–4 days per week lose significantly more weight than those who don't track at all. Pre-logging your meals the night before increases dietary adherence by removing in-the-moment decision fatigue.</p>
+
+            <h2>Conclusion</h2>
+            <p>Or, use the built-in <a href="#fitness-tracker">Fitness Tracker on this page</a> to log meals, workouts, water, and body weight all in one place — no download required. Combine tracking with the <a href="#pillar">complete weight loss guide</a> for a fully structured transformation plan.</p>
+
+            <div class="cta-box">
+                <h4>📥 Try Our Built-In Tracker First</h4>
+                <p>Before downloading yet another app, try the <a href="#fitness-tracker">free Fitness Tracker on this page</a>. Calculate your TDEE, track your meals, time your workouts, and log your progress — all without leaving this site.</p>
+            </div>
+            <a href="#pillar-map" class="back-to-top">↑ Back to Topic Map</a>
+        </article>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 GuideToWellness Hub &mdash; Science-Backed Fitness for Everyone, Everywhere.</p>
+    </footer>
+
+    <!-- ============================================
+         FITNESS TRACKER JAVASCRIPT
+         ============================================ -->
+    <script>
+        // ---- DATE DISPLAY ----
+        const dateEl = document.getElementById('log-date');
+        if (dateEl) {
+            dateEl.textContent = new Date().toLocaleDateString('en-US', { weekday:'long', month:'short', day:'numeric' });
+        }
+
+        // ---- TDEE CALCULATOR ----
+        function calcTDEE() {
+            const age    = parseFloat(document.getElementById('t-age').value);
+            const gender = document.getElementById('t-gender').value;
+            const weight = parseFloat(document.getElementById('t-weight').value);
+            const height = parseFloat(document.getElementById('t-height').value);
+            const activ  = parseFloat(document.getElementById('t-activity').value);
+            const goal   = parseFloat(document.getElementById('t-goal').value);
+
+            if (!age || !weight || !height) {
+                alert('Please fill in age, weight, and height.');
+                return;
+            }
+
+            let bmr;
+            if (gender === 'male') {
+                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+            } else {
+                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+
+            const tdee   = Math.round(bmr * activ);
+            const target = Math.round(tdee + goal);
+
+            const protein = Math.round(weight * 2.0);
+            const fat     = Math.round(target * 0.25 / 9);
+            const carbs   = Math.round((target - protein * 4 - fat * 9) / 4);
+
+            const res = document.getElementById('tdee-result');
+            res.innerHTML = `
+                <strong>Your TDEE:</strong> ${tdee} kcal/day<br>
+                <strong>Your Daily Target:</strong> <span style="font-size:1.1rem;color:var(--primary-color);">${target} kcal/day</span><br>
+                <span style="font-size:0.82rem;color:var(--text-muted);">${goal < 0 ? '🔥 Fat loss deficit applied' : goal === 0 ? '⚖️ Maintenance calories' : '💪 Lean bulk surplus applied'}</span>
+            `;
+            res.classList.add('show');
+
+            document.getElementById('mp-protein').textContent = protein + 'g';
+            document.getElementById('mp-carbs').textContent   = Math.max(carbs, 0) + 'g';
+            document.getElementById('mp-fat').textContent     = fat + 'g';
+
+            const total = protein * 4 + Math.max(carbs, 0) * 4 + fat * 9;
+            setTimeout(() => {
+                document.getElementById('bar-protein').style.width = Math.round(protein * 4 / total * 100) + '%';
+                document.getElementById('bar-carbs').style.width   = Math.round(Math.max(carbs,0) * 4 / total * 100) + '%';
+                document.getElementById('bar-fat').style.width     = Math.round(fat * 9 / total * 100) + '%';
+            }, 50);
+
+            document.getElementById('macro-display').style.display = 'block';
+        }
+
+        // ---- BMI CALCULATOR ----
+        function calcBMI() {
+            const w = parseFloat(document.getElementById('bmi-weight').value);
+            const h = parseFloat(document.getElementById('bmi-height').value) / 100;
+            if (!w || !h) { alert('Please enter weight and height.'); return; }
+
+            const bmi = (w / (h * h)).toFixed(1);
+            let category, color;
+            if      (bmi < 18.5) { category = 'Underweight'; color = '#3498db'; }
+            else if (bmi < 25)   { category = 'Normal Weight ✓'; color = '#27ae60'; }
+            else if (bmi < 30)   { category = 'Overweight'; color = '#f39c12'; }
+            else                 { category = 'Obese'; color = '#e74c3c'; }
+
+            const res = document.getElementById('bmi-result');
+            res.innerHTML = `Your BMI: <strong style="font-size:1.3rem;color:${color};">${bmi}</strong> — <span style="color:${color};">${category}</span>`;
+            res.classList.add('show');
+        }
+
+        // ---- DAILY LOG ----
+        let logEntries = [];
+
+        function addLog() {
+            const type  = document.getElementById('log-type').value;
+            const desc  = document.getElementById('log-desc').value.trim();
+            const value = document.getElementById('log-value').value;
+
+            if (!desc) { alert('Please enter a description.'); return; }
+
+            const icons = { meal:'🥗', workout:'💪', water:'💧', steps:'👟', weight:'⚖️' };
+            const units = { meal:'kcal', workout:'min', water:'glasses', steps:'steps', weight:'kg' };
+
+            logEntries.push({ type, desc, value: value || '—', unit: units[type], icon: icons[type], id: Date.now() });
+            document.getElementById('log-desc').value  = '';
+            document.getElementById('log-value').value = '';
+            renderLog();
+        }
+
+        function deleteLog(id) {
+            logEntries = logEntries.filter(e => e.id !== id);
+            renderLog();
+        }
+
+        function renderLog() {
+            const list = document.getElementById('log-list');
+            const summary = document.getElementById('log-summary');
+
+            if (!logEntries.length) {
+                list.innerHTML = '<div class="log-empty">No entries yet. Start logging above!</div>';
+                summary.style.display = 'none';
+                return;
+            }
+
+            list.innerHTML = logEntries.map(e => `
+                <div class="log-entry">
+                    <span>${e.icon} <strong>${e.desc}</strong></span>
+                    <span style="color:var(--secondary-color);font-weight:600;">${e.value} ${e.unit} <button class="log-delete" onclick="deleteLog(${e.id})">✕</button></span>
+                </div>
+            `).join('');
+
+            const totalCal = logEntries.filter(e => e.type === 'meal').reduce((sum, e) => sum + (parseFloat(e.value) || 0), 0);
+            const totalWater = logEntries.filter(e => e.type === 'water').reduce((sum, e) => sum + (parseFloat(e.value) || 0), 0);
+
+            summary.style.display = 'block';
+            summary.innerHTML = `Total Calories Logged: ${totalCal} kcal &nbsp;|&nbsp; Water: ${totalWater} glasses`;
+        }
+
+        // ---- INTERVAL TIMER ----
+        let timerInterval = null;
+        let timerRunning  = false;
+        let currentPhase  = 'work';
+        let currentRound  = 1;
+        let timeLeft      = 0;
+
+        function formatTime(s) {
+            return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+        }
+
+        function startTimer() {
+            if (timerRunning) return;
+
+            const work   = parseInt(document.getElementById('timer-work').value)   || 40;
+            const rest   = parseInt(document.getElementById('timer-rest').value)   || 20;
+            const rounds = parseInt(document.getElementById('timer-rounds').value) || 8;
+
+            if (timeLeft === 0) {
+                currentPhase = 'work';
+                currentRound = 1;
+                timeLeft = work;
+            }
+
+            timerRunning = true;
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+
+                const display  = document.getElementById('timer-display');
+                const phase    = document.getElementById('timer-phase');
+                const roundDsp = document.getElementById('timer-round-display');
+
+                display.textContent  = formatTime(timeLeft);
+                phase.textContent    = currentPhase === 'work' ? '🔥 WORK' : '😮‍💨 REST';
+                display.style.color  = currentPhase === 'work' ? 'var(--primary-color)' : 'var(--accent-orange)';
+                roundDsp.textContent = `Round ${currentRound} of ${rounds}`;
+
+                if (timeLeft <= 0) {
+                    if (currentPhase === 'work') {
+                        currentPhase = 'rest';
+                        timeLeft = rest;
+                    } else {
+                        currentRound++;
+                        if (currentRound > rounds) {
+                            clearInterval(timerInterval);
+                            timerRunning = false;
+                            display.textContent = '✅ Done!';
+                            phase.textContent   = 'Workout complete! Great work.';
+                            roundDsp.textContent = '';
+                            timeLeft = 0;
+                            return;
+                        }
+                        currentPhase = 'work';
+                        timeLeft = work;
+                    }
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerRunning  = false;
+            currentPhase  = 'work';
+            currentRound  = 1;
+            timeLeft      = 0;
+            document.getElementById('timer-display').textContent     = '00:40';
+            document.getElementById('timer-display').style.color     = 'var(--primary-color)';
+            document.getElementById('timer-phase').textContent       = 'Press Start to begin';
+            document.getElementById('timer-round-display').textContent = '';
+        }
+    </script>
+
+</body>
+</html>
